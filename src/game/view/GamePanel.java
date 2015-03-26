@@ -36,11 +36,13 @@ public class GamePanel extends JPanel
 		 * adds a text field to the panel
 		 */
 		private JTextField firstTextField;
+		private JTextField computerChoice;
 		
 		/**
 		 * changes layout of the panel
 		 */
 		private SpringLayout baseLayout;
+		
 
 		
 		
@@ -60,7 +62,11 @@ public class GamePanel extends JPanel
 			scissorsButton = new JButton("Scissors");
 			paperButton = new JButton("Paper");
 			firstTextField = new JTextField();
+			
 			baseLayout = new SpringLayout();
+			computerChoice = new JTextField();
+			
+			
 			
 			
 			
@@ -77,9 +83,6 @@ public class GamePanel extends JPanel
 		private void setupPane()
 		{
 			firstTextField.setBackground(Color.YELLOW);
-			
-			
-			
 		}
 		
 		/**
@@ -94,7 +97,18 @@ public class GamePanel extends JPanel
 			this.add(scissorsButton);
 			this.add(paperButton);
 			this.add(firstTextField);
+			this.add(computerChoice);
 			this.setBackground(Color.CYAN);
+			
+			firstTextField.setEditable(false);
+			computerChoice.setEditable(false);
+			
+			
+			
+			
+			
+			
+			
 			
 		}
 		
@@ -109,6 +123,11 @@ public class GamePanel extends JPanel
 			baseLayout.putConstraint(SpringLayout.WEST, scissorsButton, 17, SpringLayout.EAST, rockButton);
 			baseLayout.putConstraint(SpringLayout.NORTH, paperButton, 0, SpringLayout.NORTH, rockButton);
 			baseLayout.putConstraint(SpringLayout.WEST, paperButton, 19, SpringLayout.EAST, scissorsButton);
+			baseLayout.putConstraint(SpringLayout.WEST, firstTextField, 10, SpringLayout.WEST, this);
+			baseLayout.putConstraint(SpringLayout.WEST, computerChoice, 0, SpringLayout.WEST, this);
+			baseLayout.putConstraint(SpringLayout.EAST, computerChoice, 0, SpringLayout.EAST, this);
+			baseLayout.putConstraint(SpringLayout.NORTH, computerChoice, 116, SpringLayout.NORTH, this);
+			baseLayout.putConstraint(SpringLayout.EAST, firstTextField, -450, SpringLayout.EAST, this);
 		}
 		
 		/**
@@ -123,9 +142,19 @@ public class GamePanel extends JPanel
 				@Override
 				public void actionPerformed(ActionEvent Click)
 				{
-					boolean ispRock = true;
-					boolean ispScissor = false;
-					boolean ispPaper = false;
+					boolean pRock = true;
+					boolean pScissor = false;
+					boolean pPaper = false;
+					
+					baseController.setpRock(pRock);
+					baseController.setpPaper(pPaper);
+					baseController.setpScissor(pScissor);
+					baseController.computerChoice();
+					baseController.getMyGame().determine();
+					
+					firstTextField.setText("WINS: "+ baseController.getWins() + "   TIES: " + baseController.getTies() + "    LOSES: " + baseController.getLoses());
+					computerChoice.setText(baseController.getComputer());
+					System.out.println(baseController.getWins());
 					
 				}
 
@@ -137,11 +166,19 @@ public class GamePanel extends JPanel
 				@Override
 				public void actionPerformed(ActionEvent Click)
 				{
+					boolean pRock = false;
+					boolean pScissor = true;
+					boolean pPaper = false;
 					
-					boolean ispRock = false;
-					boolean ispScissor = true;
-					boolean ispPaper = false;
+					baseController.setpRock(pRock);
+					baseController.setpPaper(pPaper);
+					baseController.setpScissor(pScissor);
+					baseController.computerChoice();
+					baseController.getMyGame().determine();
 					
+					firstTextField.setText("WINS: "+baseController.getWins() + "   TIES: " + baseController.getTies() + "    LOSES: " + baseController.getLoses());
+					computerChoice.setText(baseController.getComputer());
+					System.out.println(baseController.getWins());
 				}
 
 			});
@@ -152,10 +189,19 @@ public class GamePanel extends JPanel
 				@Override
 				public void actionPerformed(ActionEvent Click)
 				{
-					boolean ispRock = false;
-					boolean ispScissor = false;
-					boolean ispPaper = true;
+					boolean pRock = false;
+					boolean pScissor = false;
+					boolean pPaper = true;
 					
+					baseController.setpRock(pRock);
+					baseController.setpPaper(pPaper);
+					baseController.setpScissor(pScissor);
+					baseController.computerChoice();
+					baseController.getMyGame().determine();
+					
+					firstTextField.setText("WINS: "+baseController.getWins() + "   TIES: " + baseController.getTies() + "    LOSES: " + baseController.getLoses());
+					computerChoice.setText(baseController.getComputer());
+					System.out.println(baseController.getWins());
 				}
 
 			});
