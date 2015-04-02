@@ -67,7 +67,7 @@ public class Game
 		else
 		{
 			loses++;
-			computer = null;
+			computer = "You lost, go home or try again! :D";
 			baseController.setComputer(computer);
 			baseController.setLoses(loses);
 			System.out.println("you lose D: games won so far...");
